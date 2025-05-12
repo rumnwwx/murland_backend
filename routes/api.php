@@ -32,5 +32,7 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('/mainpage', [User\UserController::class, 'userViewCats']);
+Route::get('/mainpage', [User\UserController::class, 'filter']);
+Route::post('/mainpage', [User\UserController::class, 'createRewiew']);
 
 
