@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateCatRequest;
-use App\Http\Requests\User\CreateBidController;
+use App\Http\Requests\User\CreateReviewRequest;
 use App\Models\Cat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,10 +37,20 @@ class UserController extends Controller
 
         return response()->json(compact('cats', 'breeds'));
     }
-    public function createRewiew(CreateBidController $request)
+    public function createReview(CreateReviewRequest $request)
     {
-        $user = User::create();
 
-        return response()->json($user);
+        $validated = $request->validated();
+
+        $review = Review::create([
+            'author_name' => $validated['name'],
+            'content' => $validated['comment'],
+            'is_approved' => false
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'review' => $review
+        ], 201);
     }
 }

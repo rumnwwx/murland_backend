@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateBidController extends FormRequest
+class CreateReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class CreateBidController extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'comment' => 'required|string|max:255',
+            'comment' => 'required|string|max:2000',
         ];
     }
 }
