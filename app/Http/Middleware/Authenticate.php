@@ -18,6 +18,6 @@ class Authenticate extends Middleware
 
     protected function unauthenticated($request, array $guards)
     {
-        throw new ApiException(401, 'При выходе произошла ошибка');
+        throw new ApiException(403, 'Forbidden');
     }
 }

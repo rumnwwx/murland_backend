@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('/mainpage', [User\UserController::class, 'userViewCats']);
+Route::post('/mainpage', [User\UserController::class, 'createReview']);
+
+
+
 Route::prefix('admin')->group(function () {
     Route::post('/login', Admin\LoginController::class);
 
@@ -30,9 +36,4 @@ Route::prefix('admin')->group(function () {
         Route::delete('/cat/{id}', [Admin\CatController::class, 'deleteCat']);
     });
 });
-
-Route::get('/mainpage', [User\UserController::class, 'userViewCats']);
-Route::get('/mainpage', [User\UserController::class, 'filter']);
-Route::post('/mainpage', [User\UserController::class, 'createReview']);
-
 

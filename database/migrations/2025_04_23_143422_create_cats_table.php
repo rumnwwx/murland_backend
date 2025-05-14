@@ -17,9 +17,9 @@ return new class extends Migration
             $table->enum('gender', ['кошка', 'кот'])->default('кошка');
             $table->date('birth_date');
             $table->string('color');
-            $table->enum('breed', ['абиссинская', 'бурма'])->default('бурма');
+            $table->foreignId('breed_id')->constrained('breeds');
             $table->enum('status',['available','reserved','adopted']);
-            $table->string('photo');
+            $table->foreignId('photo_id')->nullable()->constrained('photos')->cascadeOnDelete();
             $table->timestamps();
         });
     }

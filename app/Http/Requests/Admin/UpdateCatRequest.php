@@ -27,9 +27,9 @@ class UpdateCatRequest extends ApiRequest
             'gender' => 'nullable|in:Кот,Кошка',
             'birth_date' => 'nullable|date_format:d.m.Y',
             'color' => 'nullable|string|min:3|max:255',
-            'breed' => 'nullable|in:Абиссинская,Бурма|min:3|max:255',
+            'breed_id' => 'nullable|in:Абиссинская,Бурма|min:3|max:255',
             'status' => 'nullable|in:available,reserved,adopted',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo_id' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

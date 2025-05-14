@@ -14,9 +14,9 @@ class Cat extends Model
         'gender',
         'birth_date',
         'color',
-        'breed',
+        'breed_id',
         'status',
-        'photo'
+        'photo_id'
     ];
 
 }
