@@ -14,7 +14,8 @@ class UserController extends Controller
 {
     public function userViewCats()
     {
-        $cats = Cat::all();
+        $cats = Cat::all()->where(['status' => 'available']);
+
 
         return response()->json($cats)->setStatusCode(200);
     }

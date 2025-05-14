@@ -26,7 +26,16 @@ class CatController extends Controller
     public function allCats()
     {
 
-        $cats = Cat::all();
+        $cats = Cat::all()->sortBy(function ($cat) {
+            $statuses = [
+                'available' => 0,
+                'reserved' => 1,
+                'adopted' => 2
+            ];
+
+            return $statuses[$cat->status];
+        });
+
 
         return response()->json($cats)->setStatusCode(200);
     }
