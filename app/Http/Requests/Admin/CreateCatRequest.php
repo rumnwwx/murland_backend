@@ -27,9 +27,9 @@ class CreateCatRequest extends ApiRequest
             'gender' => 'required|in:Кот,Кошка',
             'birth_date' => 'required|date_format:d.m.Y',
             'color' => 'required|string|min:3|max:255',
-            'breed_id' => 'required|in:Абиссинская,Бурма|min:3|max:255',
+            'breed_id' => 'required',
             'status' => 'required|in:available,reserved,adopted',
-            'photo_id' => 'string',
+            'file' => 'required|mimes:jpeg,jpg,png|max:2048|image',
         ];
 
     }

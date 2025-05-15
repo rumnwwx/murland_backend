@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('breeds', function (Blueprint $table) {
             $table->id();
-            $table->enum('breed', ['бурма', 'абиссинская'])->default('бурма');
+            $table->string('breed');
             $table->timestamps();
         });
     }

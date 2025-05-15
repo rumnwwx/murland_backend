@@ -19,5 +19,12 @@ class DatabaseSeeder extends Seeder
              'login' => 'munr',
              'password' => Hash::make('QWEasd123!'),
          ]);
+
+         Breed::create([
+             'breed' => 'Бурма'
+         ]);
+         Breed::create([
+             'breed' => 'Абиссинская'
+         ]);
     }
 }

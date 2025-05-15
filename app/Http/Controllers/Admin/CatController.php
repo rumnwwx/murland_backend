@@ -6,15 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateCatRequest;
 use App\Http\Requests\Admin\UpdateCatRequest;
 use App\Models\Cat;
+use App\Models\Order;
+use App\Models\OrderCat;
+use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Reflector;
 
 class CatController extends Controller
 {
     public function __invoke(CreateCatRequest $request)
     {
+        $photo = Photo::create([
+            'file' => $request->file->store('images', 'public')
+        ]);
 
-        $cat = Cat::create($request->validated());
+        $cat = Cat::create([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'birth_date' => $request->birth_date,
+            'color' => $request->color,
+            'breed_id' => $request->breed_id,
+            'status' => $request->status,
+            'photo_id' => $photo->id,
+        ]);
 
         $data = [
             'cat' => $cat,
@@ -67,5 +82,37 @@ class CatController extends Controller
         $cat->delete($id);
 
         return response()->json(null)->setStatusCode(200);
+    }
+
+    public function getAllOrders()
+    {
+        $orders = Order::get();
+
+        foreach ($orders as $order) {
+
+            if(OrderCat::where('id', $order->id)->count()){
+                $cat = Cat::where('id', OrderCat::where('id', $order->id)->first()->cat_id)->first();
+                $data[] = array(
+                    'id' => $order->id,
+                    'name' => $order->name,
+                    'phone' => $order->phone,
+                    'status' => $order->status,
+                    'cat' => $cat
+                );
+            }
+            else{
+                $data[] = array(
+                    'id' => $order->id,
+                    'name' => $order->name,
+                    'phone' => $order->phone,
+                    'status' => $order->status,
+                );
+            }
+        }
+
+        return $data;
+
+
+//        return response()->json($orders)->setStatusCode(200);
     }
 }

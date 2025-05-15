@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Cat\CatController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin;
-use App\Http\Controllers\User;
+use App\Http\Controllers\Cat;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/mainpage', [User\UserController::class, 'userViewCats']);
-Route::post('/mainpage', [User\UserController::class, 'createReview']);
+Route::get('/cats', [Cat\CatController::class, 'index']);
+Route::post('/order', [Cat\CatController::class, 'createOrder']);
+Route::post('/ordercat' , [Cat\CatController::class, 'createOrderCat']);
+
 
 
 
@@ -30,10 +32,11 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', Admin\LogoutController::class);
         Route::post('/create', Admin\CatController::class);
-        Route::get('/cat', [Admin\CatController::class, 'allCats']);
-        Route::get('/cat/{id}', [Admin\CatController::class, 'viewCat']);
-        Route::patch('/cat/{id}', [Admin\CatController::class, 'updateCat']);
-        Route::delete('/cat/{id}', [Admin\CatController::class, 'deleteCat']);
+        Route::get('/cats', [Admin\CatController::class, 'allCats']);
+        Route::get('/cats/{id}', [Admin\CatController::class, 'viewCat']);
+        Route::patch('/cats/{id}', [Admin\CatController::class, 'updateCat']);
+        Route::delete('/cats/{id}', [Admin\CatController::class, 'deleteCat']);
+        Route::get('/orders', [Admin\CatController::class, 'getAllOrders']);
     });
 });
 
